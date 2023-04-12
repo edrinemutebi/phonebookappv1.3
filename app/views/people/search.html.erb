@@ -1,31 +1,28 @@
-<h1>Search results for '<%= params[:q] %>'</h1>
+<%= form_tag search_people_path, method: :get do %>
+  <%= text_field_tag :search, params[:search], placeholder: "Search by name, phone, or date of birth" %>
+  <%= submit_tag "Search" %>
+<% end %>
 
-<% if @people.any? %>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Phone</th>
-        <th>Email</th>
-        <th>Birthday</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @people.each do |person| %>
+<% if @search_results.present? %>
+  <h2>Search Results:</h2>
+    <hr />
+    <table>
+      <thead>
         <tr>
-          <td><%= person.name %></td>
-          <td><%= person.phone %></td>
-          <td><%= person.email %></td>
-          <td><%= person.birthday %></td>
-          <td><%= link_to 'Show', person %></td>
-          <td><%= link_to 'Edit', edit_person_path(person) %></td>
-          <td><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Birthday</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% else %>
-  <p>No results found.</p>
+      </thead>
+      <tbody>
+        <% @search_results.each do |person| %>
+          <tr>
+            <td><%= person.name %></td>
+            <td><%= person.phone %></td>
+            <td><%= person.birthday %></td>
+            <td><%= link_to "Show this person", person %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 <% end %>

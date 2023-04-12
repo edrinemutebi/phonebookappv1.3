@@ -21,6 +21,13 @@ class PeopleController < ApplicationController
   # def search
   #   render :index
   # end
+
+  def search
+    @search_results = Person.where("name LIKE ? OR phone LIKE ? OR birthday LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%")
+    render :search
+  end
+  
+  
   
   def birthdays
     @today_people = find_people_with_birthday_today
