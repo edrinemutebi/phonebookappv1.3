@@ -1,0 +1,33 @@
+<p style="color: green"><%= notice %></p>
+<h3>Welcome to the BD App</h3>
+
+<%= form_tag search_people_path, method: :get, id: 'search-form' do %>
+  <%= text_field_tag :q, params[:q] %>
+  <%= submit_tag "Search" %>
+<% end %>
+<hr />
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th>Birthday</th>
+      <th>Gender</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @people.each do |person| %>
+      <tr>
+        <td><%= person.name %></td>
+        <td><%= person.phone %></td>
+        <td><%= person.email %></td>
+        <td><%= person.birthday %></td>
+        <td><%= person.gender %></td>
+        <td><%= link_to "Show this person", person %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+

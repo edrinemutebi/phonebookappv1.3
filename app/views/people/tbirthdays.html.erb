@@ -1,0 +1,11 @@
+<h1>Birthdays today <%= Date.today.strftime("%B %d") %></h1>
+
+<% if @today_people.present? %>
+  <ul>
+    <% @today_people.each do |person| %>
+      <li><%= person.name %><span> --- <%=person.phone%></span></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No birthdays today</p>
+<% end %>
